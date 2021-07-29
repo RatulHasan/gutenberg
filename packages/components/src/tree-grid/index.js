@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { includes } from 'lodash';
+import { motion, AnimateSharedLayout } from 'framer-motion';
 
 /**
  * WordPress dependencies
@@ -194,16 +195,19 @@ function TreeGrid(
 	/* Disable reason: A treegrid is implemented using a table element. */
 	/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 	return (
-		<RovingTabIndexContainer>
-			<table
-				{ ...props }
-				role="treegrid"
-				onKeyDown={ onKeyDown }
-				ref={ ref }
-			>
-				<tbody>{ children }</tbody>
-			</table>
-		</RovingTabIndexContainer>
+		<AnimateSharedLayout>
+			<RovingTabIndexContainer>
+				<motion.table
+					layout
+					{ ...props }
+					role="treegrid"
+					onKeyDown={ onKeyDown }
+					ref={ ref }
+				>
+					<tbody>{ children }</tbody>
+				</motion.table>
+			</RovingTabIndexContainer>
+		</AnimateSharedLayout>
 	);
 	/* eslint-enable jsx-a11y/no-noninteractive-element-to-interactive-role */
 }

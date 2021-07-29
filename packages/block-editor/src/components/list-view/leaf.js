@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { animated } from 'react-spring/web.cjs';
 import classnames from 'classnames';
 
 /**
@@ -9,33 +8,16 @@ import classnames from 'classnames';
  */
 import { __experimentalTreeGridRow as TreeGridRow } from '@wordpress/components';
 
-/**
- * Internal dependencies
- */
-import useMovingAnimation from '../use-moving-animation';
-
-const AnimatedTreeGridRow = animated( TreeGridRow );
-
 export default function ListViewLeaf( {
-	isSelected,
 	position,
 	level,
 	rowCount,
 	children,
 	className,
-	path,
 	...props
 } ) {
-	const ref = useMovingAnimation( {
-		isSelected,
-		adjustScrolling: false,
-		enableAnimation: true,
-		triggerAnimationOnChange: path.join( '_' ),
-	} );
-
 	return (
-		<AnimatedTreeGridRow
-			ref={ ref }
+		<TreeGridRow
 			className={ classnames( 'block-editor-list-view-leaf', className ) }
 			level={ level }
 			positionInSet={ position }
@@ -43,6 +25,6 @@ export default function ListViewLeaf( {
 			{ ...props }
 		>
 			{ children }
-		</AnimatedTreeGridRow>
+		</TreeGridRow>
 	);
 }

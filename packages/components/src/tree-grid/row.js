@@ -1,7 +1,24 @@
 /**
+ * External dependencies
+ */
+import { motion } from 'framer-motion';
+
+/**
  * WordPress dependencies
  */
 import { forwardRef } from '@wordpress/element';
+
+const TREE_GRID_ROW_VARIANTS = {
+	init: {
+		opacity: 0,
+	},
+	open: {
+		opacity: 1,
+	},
+	exit: {
+		opacity: 0,
+	},
+};
 
 function TreeGridRow(
 	{ children, level, positionInSet, setSize, isExpanded, ...props },
@@ -14,7 +31,12 @@ function TreeGridRow(
 		// linting rule fails when validating this markup.
 		//
 		// eslint-disable-next-line jsx-a11y/role-supports-aria-props
-		<tr
+		<motion.tr
+			layout
+			initial={ 'init' }
+			animate={ 'open' }
+			exit={ 'exit' }
+			variants={ TREE_GRID_ROW_VARIANTS }
 			{ ...props }
 			ref={ ref }
 			role="row"
@@ -24,7 +46,7 @@ function TreeGridRow(
 			aria-expanded={ isExpanded }
 		>
 			{ children }
-		</tr>
+		</motion.tr>
 	);
 }
 
